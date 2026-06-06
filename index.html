@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soul Lens</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#08080F;color:#E8E6F0;font-family:'DM Sans',sans-serif;min-height:100vh}
+.pg{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 20px;text-align:center}
+h1{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;margin-bottom:12px;background:linear-gradient(135deg,#E8E6F0,#6B4FD8 55%,#C9950A);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.15}
+p{color:rgba(232,230,240,0.5);font-size:.95rem;line-height:1.7;max-width:380px;margin-bottom:20px}
+input{display:block;width:100%;max-width:320px;background:#181825;border:1.5px solid rgba(255,255,255,0.1);border-radius:12px;padding:13px 16px;color:#E8E6F0;font-size:1rem;outline:none;margin-bottom:14px}
+input:focus{border-color:#6B4FD8}
+button{display:block;width:100%;max-width:320px;background:#6B4FD8;color:#fff;border:none;border-radius:50px;padding:14px;font-size:.95rem;font-weight:500;cursor:pointer;margin-bottom:8px}
+button:hover{background:#7B5FE8}
+.card{background:#181825;border:1.5px solid rgba(255,255,255,0.08);border-radius:14px;padding:18px;width:100%;max-width:520px;margin:10px 0;cursor:pointer;text-align:left;color:#E8E6F0;font-size:.9rem;line-height:1.5}
+.card:hover{border-color:#6B4FD8}
+.card.sel{border-color:#6B4FD8;box-shadow:0 0 0 1px #6B4FD8}
+.orb{width:80px;height:80px;border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:1.6rem}
+.gbtn{display:block;width:100%;max-width:320px;background:#1A7A42;color:#fff;border:none;border-radius:50px;padding:14px;font-size:.95rem;font-weight:500;cursor:pointer;text-decoration:none;margin-top:10px}
+.gbtn:hover{background:#1E8F4E}
+.muted{font-size:.7rem;opacity:.4;margin-top:8px}
+</style>
+</head>
+<body>
+
+<div id="p0" class="pg">
+  <h1>Cum te vad<br>cei din jurul tau?</h1>
+  <p>Descoperă culoarea sufletului tău și primești un jurnal PDF gratuit cu 44 de pagini de autocunoaștere.</p>
+  <input id="nm" type="text" placeholder="Scrie prenumele tău...">
+  <button onclick="incepe()">Descoperă culoarea ta</button>
+  <span class="muted">10 întrebări &bull; 5 minute &bull; gratuit</span>
+</div>
+
+<div id="p1" class="pg" style="display:none">
+  <div style="width:100%;max-width:520px">
+    <div style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(232,230,240,0.4);margin-bottom:8px" id="nr"></div>
+    <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:1.3rem;margin-bottom:24px;line-height:1.45" id="qt"></div>
+    <div id="op"></div>
+    <button id="bn" onclick="urm()" style="display:none;margin-top:20px">Continua</button>
+  </div>
+</div>
+
+<div id="p2" class="pg" style="display:none">
+  <div class="orb" id="orb"></div>
+  <div style="font-family:'Playfair Display',serif;font-style:italic;color:rgba(232,230,240,0.5);margin-bottom:4px" id="rg"></div>
+  <div style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;margin-bottom:8px" id="rn"></div>
+  <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:.95rem;color:rgba(232,230,240,0.5);margin-bottom:20px" id="rt"></div>
+  <div style="font-size:.88rem;line-height:1.75;color:rgba(232,230,240,0.5);max-width:440px;margin-bottom:20px;text-align:left" id="rd"></div>
+  <div style="background:#181825;border:1.5px solid #1A7A42;border-radius:14px;padding:20px;width:100%;max-width:440px">
+    <div style="color:#2EAE5F;font-weight:500;margin-bottom:6px">Jurnalul tău de suflet &mdash; Gratuit</div>
+    <div style="font-size:.8rem;color:rgba(232,230,240,0.5);margin-bottom:14px">44 de pagini cu întrebări și provocări pentru fiecare valoare.</div>
+    <a class="gbtn" href="https://drive.google.com/uc?export=download&id=10aKHvlGtLdT24K5gOFT7pY084BO5XHw1" target="_blank">Descarcă jurnalul PDF gratuit</a>
+  </div>
+  <button onclick="rst()" style="background:transparent;color:rgba(232,230,240,0.4);font-size:.8rem;margin-top:12px;border:none;cursor:pointer;text-decoration:underline">Ia testul din nou</button>
+</div>
+
+<script>
+var un="", cur=0, sel=null;
+var sc={auriu:0,albastru:0,verde:0,rosu:0,mov:0,portocaliu:0,alb:0,galben:0,negru:0,argintiu:0};
+
+var Q=[
+  {t:"Cel mai bun prieten îți spune că a copiat la un test. Ce simți primul?",a:[
+    {e:"&#128558;",l:"Îngrijorare — ce se întâmplă dacă află profesorul?",c:"verde"},
+    {e:"&#128532;",l:"Dezamăgire — știu că poate mai mult de atât.",c:"albastru"},
+    {e:"&#128548;",l:"Furie — asta nu e corect față de ceilalți.",c:"negru"},
+    {e:"&#129300;",l:"Curiozitate — de ce a simțit că trebuie să facă asta?",c:"mov"}
+  ]},
+  {t:"Ești singurul care știe că un coleg a luat ceva fără să ceară. Ce faci?",a:[
+    {e:"&#128483;",l:"Îl abordez direct și îl întreb de ce.",c:"albastru"},
+    {e:"&#129296;",l:"Tac. Nu e treaba mea.",c:"alb"},
+    {e:"&#129309;",l:"Îl ajut să întoarcă lucrul discret.",c:"verde"},
+    {e:"&#9889;",l:"Îi spun că dacă nu repară, voi spune eu.",c:"argintiu"}
+  ]},
+  {t:"Ai o zi groaznică. Seara, în pat, cum închei ziua?",a:[
+    {e:"&#128211;",l:"Scriu ce s-a întâmplat și încerc să înțeleg.",c:"mov"},
+    {e:"&#128170;",l:"Mă gândesc ce pot face mâine diferit.",c:"rosu"},
+    {e:"&#127769;",l:"Caut un lucru mic frumos din ziua asta.",c:"verde"},
+    {e:"&#128241;",l:"Scriu unui prieten — trebuie să vorbesc.",c:"albastru"}
+  ]},
+  {t:"Ideea ta e mai bună, dar liderul alege altceva. Ce faci?",a:[
+    {e:"&#9995;",l:"Explic calm de ce cred că ideea mea e mai bună.",c:"albastru"},
+    {e:"&#127919;",l:"Accept decizia și dau tot ce am pentru echipă.",c:"rosu"},
+    {e:"&#128161;",l:"Încerc să combin ideile.",c:"portocaliu"},
+    {e:"&#129330;",l:"Tac, dar rămân disponibil.",c:"auriu"}
+  ]},
+  {t:"Un necunoscut pe stradă pare trist. Ce faci?",a:[
+    {e:"&#128075;",l:"Mă opresc și îl întreb dacă e bine.",c:"albastru"},
+    {e:"&#128591;",l:"Trec, dar îmi doresc să fi putut face ceva.",c:"verde"},
+    {e:"&#128222;",l:"Sun pe cineva să vină cu mine.",c:"alb"},
+    {e:"&#128172;",l:"Îi ofer ceva concret fără să întreb prea mult.",c:"rosu"}
+  ]},
+  {t:"Ai o săptămână liberă. Cum o petreci?",a:[
+    {e:"&#127912;",l:"Creez ceva — desen, muzică, poveste.",c:"portocaliu"},
+    {e:"&#127939;",l:"Fac sport sau un proiect cu rezultat vizibil.",c:"rosu"},
+    {e:"&#128218;",l:"Citesc și învăț ceva ce mă fascinează.",c:"mov"},
+    {e:"&#127918;",l:"Mă relaxez și mă încarc.",c:"galben"}
+  ]},
+  {t:"Cineva face o glumă pe seama ta. Ce simți?",a:[
+    {e:"&#128514;",l:"Râd și eu — umorul dezarmează orice.",c:"galben"},
+    {e:"&#128566;",l:"Tac, dar în interior mă doare mai mult.",c:"alb"},
+    {e:"&#128293;",l:"Mă înfurii imediat.",c:"negru"},
+    {e:"&#128064;",l:"Îi spun calm că nu mi-a plăcut.",c:"argintiu"}
+  ]},
+  {t:"Prietenul trece printr-o perioadă grea și nu vrea să vorbească.",a:[
+    {e:"&#128682;",l:"Respect spațiul lui — va veni când e gata.",c:"alb"},
+    {e:"&#128140;",l:"Îi trimit un mesaj: sunt aici pentru tine.",c:"auriu"},
+    {e:"&#9749;",l:"Îl sun și propun să ieșim, fără să îl forțez.",c:"verde"},
+    {e:"&#128490;",l:"Îl întreb direct ce se întâmplă.",c:"albastru"}
+  ]},
+  {t:"Cum ești când ești complet singur?",a:[
+    {e:"&#128524;",l:"Mă simt bine — e timpul meu.",c:"alb"},
+    {e:"&#127744;",l:"Mă gândesc mult, uneori prea mult.",c:"mov"},
+    {e:"&#128543;",l:"Devin agitat, am nevoie de oameni.",c:"galben"},
+    {e:"&#9997;",l:"Creez sau construiesc ceva.",c:"portocaliu"}
+  ]},
+  {t:"Cum știi că ai făcut ceva cu adevărat bun?",a:[
+    {e:"&#128079;",l:"Când ceilalți îmi spun.",c:"galben"},
+    {e:"&#129323;",l:"Când nu are nevoie să o știe nimeni — eu știu.",c:"argintiu"},
+    {e:"&#128155;",l:"Când cel din fața mea se simte mai bine.",c:"auriu"},
+    {e:"&#128200;",l:"Când văd un progres concret.",c:"rosu"}
+  ]}
+];
+
+var R={
+  auriu:{n:"AURIU",h:"#C9950A",bg:"#1A1408",tag:"Ești valoros chiar și când nimeni nu îți spune.",desc:"Oamenii te văd ca pe un reper — stabil, cald, demn. Prezența ta contează. Ceilalți se simt mai în siguranță când ești acolo."},
+  albastru:{n:"ALBASTRU",h:"#1B5FA8",bg:"#090E18",tag:"Adevărul este valoarea ta cea mai de preț.",desc:"Oamenii te văd ca pe cineva sincer și de încredere. Știu că ce spui îl crezi cu adevărat."},
+  verde:{n:"VERDE",h:"#1A7A42",bg:"#091209",tag:"Speranța ta este contagioasă.",desc:"Oamenii te văd ca pe o sursă de energie pozitivă, autentică. Ai darul de a găsi sensul chiar și în zile grele."},
+  rosu:{n:"ROSU",h:"#8B1A1A",bg:"#120808",tag:"Pasiunea ta aprinde tot ce atingi.",desc:"Oamenii te văd ca pe cineva hotărât, clar, care nu se oprește la jumătate. Lângă tine lucrurile chiar se întâmplă."},
+  mov:{n:"MOV",h:"#5B2D8E",bg:"#0D0912",tag:"Înțelegi lucruri pe care alții nici nu le observă.",desc:"Oamenii te văd ca pe cineva adânc și rar. Ești sursa celor mai bune sfaturi."},
+  portocaliu:{n:"PORTOCALIU",h:"#C45D00",bg:"#180C00",tag:"Creezi lumi pe care alții nu le văd încă.",desc:"Oamenii te văd ca pe cineva surprinzător și creativ. Curajul de a crea este mai rar decât talentul."},
+  alb:{n:"ALB",h:"#AAAAAA",bg:"#0A0A0A",tag:"Știi să fii cu tine însuți și asta este rar.",desc:"Oamenii te văd ca pe cineva liniștit și prezent. Când vorbești, merită ascultat."},
+  galben:{n:"GALBEN",h:"#B8A000",bg:"#141000",tag:"Bucuria ta este o decizie, nu o întâmplare.",desc:"Oamenii te văd ca pe cineva care aduce energie acolo unde intră."},
+  negru:{n:"NEGRU",h:"#888888",bg:"#080808",tag:"Sub intensitatea ta se află ceva prețios.",desc:"Oamenii te văd ca pe cineva puternic și complex. Simți lucrurile mai adânc decât cei mai mulți."},
+  argintiu:{n:"ARGINTIU",h:"#8888AA",bg:"#0A0A10",tag:"Cine ești când nu se uită nimeni — asta ești tu.",desc:"Oamenii te văd ca pe cineva consistent și real. Se poate conta pe tine."}
+};
+
+function arata(id){
+  document.getElementById("p0").style.display="none";
+  document.getElementById("p1").style.display="none";
+  document.getElementById("p2").style.display="none";
+  document.getElementById(id).style.display="flex";
+}
+
+function incepe(){
+  var v=document.getElementById("nm").value.trim();
+  if(v.length<1){
+    document.getElementById("nm").style.borderColor="#C9950A";
+    document.getElementById("nm").focus();
+    return;
+  }
+  un=v;
+  cur=0;
+  for(var k in sc) sc[k]=0;
+  randQ();
+  arata("p1");
+}
+
+function randQ(){
+  sel=null;
+  var q=Q[cur];
+  document.getElementById("nr").textContent="Întrebarea "+(cur+1)+" din "+Q.length;
+  document.getElementById("qt").textContent=q.t;
+  var h="";
+  for(var i=0;i<q.a.length;i++){
+    h+='<div class="card" onclick="alege('+i+')"><span style="font-size:1.4rem;margin-right:10px">'+q.a[i].e+'</span>'+q.a[i].l+'</div>';
+  }
+  document.getElementById("op").innerHTML=h;
+  document.getElementById("bn").style.display="none";
+}
+
+function alege(i){
+  var cards=document.querySelectorAll(".card");
+  for(var k=0;k<cards.length;k++) cards[k].classList.remove("sel");
+  cards[i].classList.add("sel");
+  sel=i;
+  sc[Q[cur].a[i].c]++;
+  document.getElementById("bn").style.display="block";
+}
+
+function urm(){
+  if(sel===null) return;
+  cur++;
+  if(cur<Q.length){
+    randQ();
+  } else {
+    calcul();
+  }
+}
+
+function calcul(){
+  var top="auriu", mx=-1;
+  for(var k in sc){if(sc[k]>mx){mx=sc[k];top=k;}}
+  var r=R[top];
+  document.body.style.background=r.bg;
+  var orb=document.getElementById("orb");
+  orb.style.cssText="width:80px;height:80px;border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;background:"+r.h+"22;border:1px solid "+r.h+"55;color:"+r.h+";box-shadow:0 0 36px "+r.h+"28;";
+  orb.textContent="*";
+  document.getElementById("rg").textContent=un+", sufletul tău este...";
+  var rn=document.getElementById("rn");
+  rn.textContent=r.n;
+  rn.style.color=r.h;
+  document.getElementById("rt").textContent=r.tag;
+  document.getElementById("rd").textContent=r.desc;
+  arata("p2");
+}
+
+function rst(){
+  document.body.style.background="#08080F";
+  document.getElementById("nm").value="";
+  document.getElementById("nm").style.borderColor="";
+  arata("p0");
+}
+</script>
+</body>
+</html>
