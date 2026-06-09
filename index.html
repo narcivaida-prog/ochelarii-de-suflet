@@ -22,6 +22,10 @@ button:hover{background:#7B5FE8}
 .gbtn{display:block;width:100%;max-width:320px;background:#1A7A42;color:#fff;border:none;border-radius:50px;padding:14px;font-size:.95rem;font-weight:500;cursor:pointer;text-decoration:none;margin-top:10px}
 .gbtn:hover{background:#1E8F4E}
 .muted{font-size:.7rem;opacity:.4;margin-top:8px}
+
+.xblock{background:var(--card);border:1px solid;border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.xlabel{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;margin-bottom:6px}
+.xtext{font-size:.84rem;line-height:1.65;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -49,6 +53,13 @@ button:hover{background:#7B5FE8}
   <div style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;margin-bottom:8px" id="rn"></div>
   <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:.95rem;color:rgba(232,230,240,0.5);margin-bottom:20px" id="rt"></div>
   <div style="font-size:.88rem;line-height:1.75;color:rgba(232,230,240,0.5);max-width:440px;margin-bottom:20px;text-align:left" id="rd"></div>
+  <!-- Secretul ochelarilor -->
+  <div id="rs" style="border-left:2px solid;border-radius:0 12px 12px 0;padding:13px 15px;margin-bottom:16px;width:100%;max-width:440px;text-align:left">
+    <div style="font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(232,230,240,0.45);margin-bottom:6px">Secretul ochelarilor</div>
+    <div id="rst" style="font-family:'Playfair Display',serif;font-style:italic;font-size:.87rem;line-height:1.6"></div>
+  </div>
+  <!-- Sectiuni extinse -->
+  <div id="extra" style="width:100%;max-width:440px;margin-bottom:16px"></div>
   <div style="background:#181825;border:1.5px solid #1A7A42;border-radius:14px;padding:20px;width:100%;max-width:440px">
     <div style="color:#2EAE5F;font-weight:500;margin-bottom:6px">Jurnalul tău de suflet &mdash; Gratuit</div>
     <div style="font-size:.8rem;color:rgba(232,230,240,0.5);margin-bottom:14px">44 de pagini cu întrebări și provocări pentru fiecare valoare.</div>
@@ -125,16 +136,106 @@ var Q=[
 ];
 
 var R={
-  auriu:{n:"AURIU",h:"#C9950A",bg:"#1A1408",tag:"Ești valoros chiar și când nimeni nu îți spune.",desc:"Oamenii te văd ca pe un reper — stabil, cald, demn. Prezența ta contează. Ceilalți se simt mai în siguranță când ești acolo."},
-  albastru:{n:"ALBASTRU",h:"#1B5FA8",bg:"#090E18",tag:"Adevărul este valoarea ta cea mai de preț.",desc:"Oamenii te văd ca pe cineva sincer și de încredere. Știu că ce spui îl crezi cu adevărat."},
-  verde:{n:"VERDE",h:"#1A7A42",bg:"#091209",tag:"Speranța ta este contagioasă.",desc:"Oamenii te văd ca pe o sursă de energie pozitivă, autentică. Ai darul de a găsi sensul chiar și în zile grele."},
-  rosu:{n:"ROSU",h:"#8B1A1A",bg:"#120808",tag:"Pasiunea ta aprinde tot ce atingi.",desc:"Oamenii te văd ca pe cineva hotărât, clar, care nu se oprește la jumătate. Lângă tine lucrurile chiar se întâmplă."},
-  mov:{n:"MOV",h:"#5B2D8E",bg:"#0D0912",tag:"Înțelegi lucruri pe care alții nici nu le observă.",desc:"Oamenii te văd ca pe cineva adânc și rar. Ești sursa celor mai bune sfaturi."},
-  portocaliu:{n:"PORTOCALIU",h:"#C45D00",bg:"#180C00",tag:"Creezi lumi pe care alții nu le văd încă.",desc:"Oamenii te văd ca pe cineva surprinzător și creativ. Curajul de a crea este mai rar decât talentul."},
-  alb:{n:"ALB",h:"#AAAAAA",bg:"#0A0A0A",tag:"Știi să fii cu tine însuți și asta este rar.",desc:"Oamenii te văd ca pe cineva liniștit și prezent. Când vorbești, merită ascultat."},
-  galben:{n:"GALBEN",h:"#B8A000",bg:"#141000",tag:"Bucuria ta este o decizie, nu o întâmplare.",desc:"Oamenii te văd ca pe cineva care aduce energie acolo unde intră."},
-  negru:{n:"NEGRU",h:"#888888",bg:"#080808",tag:"Sub intensitatea ta se află ceva prețios.",desc:"Oamenii te văd ca pe cineva puternic și complex. Simți lucrurile mai adânc decât cei mai mulți."},
-  argintiu:{n:"ARGINTIU",h:"#8888AA",bg:"#0A0A10",tag:"Cine ești când nu se uită nimeni — asta ești tu.",desc:"Oamenii te văd ca pe cineva consistent și real. Se poate conta pe tine."}
+  auriu:{n:"AURIU",h:"#C9950A",bg:"#1A1408",
+    tag:"Esti valoros chiar si cand nimeni nu iti spune.",
+    desc:"Oamenii din jurul tau te vad ca pe un reper - stabil, cald, demn. Prezenta ta conteaza. Ceilalti se simt mai in siguranta cand esti acolo.",
+    sec:"Luca a descoperit ca mama lui il vedea auriu - nu pentru ca era perfect, ci pentru ca era autentic. Aurul tau nu vine din aprobare. Era acolo tot timpul.",
+    super:"Superputerea ta: dai oamenilor senzatia ca sunt importanti doar prin felul in care ii asculti. Rar cineva face asta fara sa incerce.",
+    umbra:"Umbra ta: uneori accepti mai putin decat meriti ca sa nu deranjezi. Demnitatea adevarata inseamna sa ocupi si spatiul care ti se cuvine.",
+    altii:"Ce spun altii fara sa stie: Nu stiu de ce, dar ma simt bine cand e si el/ea acolo.",
+    personaj:"Personajul tau: Mama lui Luca — prezenta calda, constanta, aurul care nu se stinge.",
+    provocare:"Azi: Spune unui om un lucru concret pe care il apreciezi la el. Fara ocazie speciala."
+  },
+  albastru:{n:"ALBASTRU",h:"#1B5FA8",bg:"#090E18",
+    tag:"Adevarul este valoarea ta cea mai de pret.",
+    desc:"Oamenii te vad ca pe cineva sincer si de incredere. Stiu ca ce spui il crezi cu adevarat. Esti ancora - cel pe care se bazeaza cand vor un raspuns real.",
+    sec:"Rares era albastru pur cand spunea adevarul si cenusiu cand mintea. Tu esti albastru aproape tot timpul. Traiesti cu tine insuti in pace.",
+    super:"Superputerea ta: oamenii vin la tine cand vor un raspuns real, nu unul confortabil. Esti cel care spune ce altii doar gandesc.",
+    umbra:"Umbra ta: sinceritatea fara diplomatie poate rani fara sa vrei. Adevarul spus cu grija construieste; aruncat ca piatra distruge.",
+    altii:"Ce spun altii fara sa stie: Daca el/ea zice ca e bine, e bine. Daca zice ca nu e, nu o sa fie.",
+    personaj:"Personajul tau: Rares dupa ce a invatat sa fie sincer — albastrul curat, fara cenusiu.",
+    provocare:"Azi: Spune un adevar mic pe care l-ai tot amanat. Nu dramatic. Doar real."
+  },
+  verde:{n:"VERDE",h:"#1A7A42",bg:"#091209",
+    tag:"Speranta ta este contagioasa.",
+    desc:"Oamenii te vad ca pe o sursa de energie pozitiva, autentica. Ai un dar rar: sa gasesti sensul chiar si in zile grele. Ceilalti simt asta si vin spre tine.",
+    sec:"Ana era verde intens - nu pentru ca nu suferea, ci pentru ca alegea in fiecare dimineata sa caute un motiv sa mearga mai departe. Exact cum faci si tu.",
+    super:"Superputerea ta: poti transforma o camera cu o singura propozitie. Stii sa gasesti frumosul unde altii vad doar gri.",
+    umbra:"Umbra ta: uneori porti sperantele altora pana obosesti. Nu esti obligat sa fii optimist pentru toata lumea. Si tu ai voie sa ai zile cenusii.",
+    altii:"Ce spun altii fara sa stie: Cand ma simt pierdut, ma gandesc la cum ar vedea el/ea situatia asta.",
+    personaj:"Personajul tau: Ana din salonul cinci — verdele care alege in fiecare dimineata sa existe.",
+    provocare:"Azi: Scrie un singur lucru mic pe care il astepti maine. Cat o ceasca de cafea sau o conversatie buna."
+  },
+  rosu:{n:"ROSU",h:"#8B1A1A",bg:"#120808",
+    tag:"Pasiunea ta aprinde tot ce atingi.",
+    desc:"Oamenii te vad ca pe cineva cu foc interior - hotarat, clar, care nu se opreste la jumatate. Langa tine lucrurile chiar se intampla.",
+    sec:"Antrenorul din poveste era rosu aprins - nu de furie, ci de pasiune. Credea in baiat mai mult decat oricine altcineva.",
+    super:"Superputerea ta: termini ce incepi cand altii au renuntat deja. Esti cel pe care se bazeaza echipa cand lucrurile devin grele.",
+    umbra:"Umbra ta: intensitatea ta poate parea intimidanta. Uneori oamenii au nevoie de prezenta ta, nu de performanta ta.",
+    altii:"Ce spun altii fara sa stie: Cand e el/ea in proiect, stiu ca se va termina. Nu stiu cum, dar se va termina.",
+    personaj:"Personajul tau: Antrenorul Mircea — rosul care crede in oameni mai mult decat cred ei in ei insisi.",
+    provocare:"Azi: Fa 15 minute dintr-un lucru la care vrei sa devii mai bun. Fara scuze. Doar 15 minute."
+  },
+  mov:{n:"MOV",h:"#5B2D8E",bg:"#0D0912",
+    tag:"Intelegi lucruri pe care altii nici nu le observa.",
+    desc:"Oamenii te vad ca pe cineva adanc si rar. Cei care te cunosc cu adevarat stiu ca esti sursa celor mai bune sfaturi.",
+    sec:"Luca a inteles ultimul lucru cand ochelarii s-au rupt: intelepciunea nu este sa stii mai mult, ci sa stii ce sa faci cu ce stii. Tu ai deja asta.",
+    super:"Superputerea ta: vezi patternuri si conexiuni pe care altii le rateaza. Stii de ce se intampla lucrurile, nu doar ca se intampla.",
+    umbra:"Umbra ta: pentru ca intelegi atat de mult, uneori ramai in cap si nu actionezi. Intelepciunea fara actiune este doar teorie frumoasa.",
+    altii:"Ce spun altii fara sa stie: A spus ceva acum doua saptamani si abia acum inteleg ce voia sa zica.",
+    personaj:"Personajul tau: Luca dupa ce ochelarii s-au rupt — cel care a invatat sa vada fara ajutor magic.",
+    provocare:"Azi: Inainte sa adormi, intreaba-te: Ce am facut bine? Ce as fi putut face mai bine? Ce am invatat despre mine?"
+  },
+  portocaliu:{n:"PORTOCALIU",h:"#C45D00",bg:"#180C00",
+    tag:"Creezi lumi pe care altii nu le vad inca.",
+    desc:"Oamenii te vad ca pe cineva surprinzator si creativ. Ai o energie care transforma lucrurile banale in ceva interesant.",
+    sec:"Curajul de a crea este mai rar decat talentul. Tu il ai.",
+    super:"Superputerea ta: gasesti solutii acolo unde altii vad doar probleme. Creierul tau nu accepta nu se poate ca raspuns final.",
+    umbra:"Umbra ta: incepi multe si termini mai putine. O idee dusa la capat valoreaza mai mult decat zece abandonate.",
+    altii:"Ce spun altii fara sa stie: Nu stiu cum face, dar mereu gaseste o alta cale.",
+    personaj:"Personajul tau: Elena — portocaliul care a invatat ca a crea inseamna curaj, nu perfectiune.",
+    provocare:"Azi: Creeaza ceva mic, doar pentru tine. Nu arata nimanui. Fa-l sa existe si atat."
+  },
+  alb:{n:"ALB",h:"#AAAAAA",bg:"#0A0A0A",
+    tag:"Stii sa fii cu tine insuti si asta este rar.",
+    desc:"Oamenii te vad ca pe cineva linistit si prezent. Nu esti absent - esti selectiv. Cand vorbesti, merita ascultat.",
+    sec:"Luca a petrecut o zi singur, fara telefon, fara muzica, si a descoperit ca este destul de interesant ca sa ii fie suficient companie.",
+    super:"Superputerea ta: nu ai nevoie de validare externa ca sa stii cine esti. Asta te face imun la presiunile la care altii cedeaza.",
+    umbra:"Umbra ta: independenta ta emotionala poate parea raceala. Uneori am nevoie de tine este cel mai puternic lucru pe care il poti spune.",
+    altii:"Ce spun altii fara sa stie: Nu stiu niciodata exact ce gandeste, dar cand vorbeste simt ca e acolo cu totul.",
+    personaj:"Personajul tau: Luca in sambata in care a ramas singur si a descoperit ca tacerea poate fi plina.",
+    provocare:"Azi: 30 de minute fara telefon, fara nimic. Doar tu. Scrie ce apare."
+  },
+  galben:{n:"GALBEN",h:"#B8A000",bg:"#141000",
+    tag:"Bucuria ta este o decizie, nu o intamplare.",
+    desc:"Oamenii te vad ca pe cineva care aduce energie acolo unde intra. Ai capacitatea rara de a face o incapere sa se simta altfel.",
+    sec:"Bucuria autentica nu este performata. Invata sa o pastrezi reala - este mai puternica decat orice masca.",
+    super:"Superputerea ta: schimbi atmosfera unei incaperi fara sa faci nimic special. Prezenta ta este deja un cadou.",
+    umbra:"Umbra ta: uneori performezi bucuria cand esti obosit. Oamenii care te iubesc vor sa stie si cum esti cu adevarat.",
+    altii:"Ce spun altii fara sa stie: Ziua mea era proasta pana l-am/am vazut pe el/ea.",
+    personaj:"Personajul tau: Sergiu dupa ce a invatat sa zambeasca si cand nu e public — galbenul real.",
+    provocare:"Azi: Spune cuiva sincer cum esti. Nu bine automat. Raspunsul adevarat."
+  },
+  negru:{n:"NEGRU",h:"#888888",bg:"#080808",
+    tag:"Sub intensitatea ta se afla ceva pretios.",
+    desc:"Oamenii te vad ca pe cineva puternic si complex. Intensitatea ta nu este agresivitate - este semn ca simti lucrurile mai adanc.",
+    sec:"Andrei nu era rau. Era ranit atat de profund incat nu mai lasa lumina sa intre. Uneori prezenta cuiva care nu pleaca este suficienta.",
+    super:"Superputerea ta: simti inautenticul imediat. Nu poti fi pacalit de fatade. Asta te face unul dintre cei mai loiali oameni pentru cei care trec de aparente.",
+    umbra:"Umbra ta: intensitatea cu care simti lucrurile te poate epuiza inainte sa ii epuizeze pe ceilalti. Ai nevoie de mai multa odihna emotionala decat recunosti.",
+    altii:"Ce spun altii fara sa stie: Nu e usor de abordat, dar daca te accepta, te accepta cu totul.",
+    personaj:"Personajul tau: Andrei — negrul care poarta un rosu aprins in interior, asteptand pe cineva care sa nu plece.",
+    provocare:"Azi: Intreaba-te: ce se afla sub cel mai puternic sentiment pe care il ai acum? Nu furia — ce e sub ea?"
+  },
+  argintiu:{n:"ARGINTIU",h:"#8888AA",bg:"#0A0A10",
+    tag:"Cine esti cand nu se uita nimeni - asta esti tu.",
+    desc:"Oamenii te vad ca pe cineva consistent si real. Nu joci roluri diferite pentru audiente diferite. Se poate conta pe tine.",
+    sec:"Caracterul se construieste in momentele nevazute. Fiecare alegere mica de integritate adauga un strat la cine devii.",
+    super:"Superputerea ta: esti acelasi om indiferent cu cine vorbesti. Oamenii nu stiu de ce au incredere in tine, dar au.",
+    umbra:"Umbra ta: standardele tale ridicate fata de tine insuti pot deveni nemiloase. Esti mai aspru cu tine decat ai fi cu oricine altcineva.",
+    altii:"Ce spun altii fara sa stie: Daca a promis, se intampla. Simplu.",
+    personaj:"Personajul tau: Luca care scrie scrisoarea catre viitor — argintiul construit din mii de momente nevazute.",
+    provocare:"Azi: Scrie 5 lucruri pe care le faci bine cand nu te vede nimeni. Nu realizari. Alegeri mici. Ala esti tu."
+  }
 };
 
 function arata(id){
@@ -198,12 +299,40 @@ function calcul(){
   var orb=document.getElementById("orb");
   orb.style.cssText="width:80px;height:80px;border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;background:"+r.h+"22;border:1px solid "+r.h+"55;color:"+r.h+";box-shadow:0 0 36px "+r.h+"28;";
   orb.textContent="*";
-  document.getElementById("rg").textContent=un+", sufletul tău este...";
+  document.getElementById("rg").textContent=un+", sufletul tau este...";
   var rn=document.getElementById("rn");
-  rn.textContent=r.n;
-  rn.style.color=r.h;
+  rn.textContent=r.n; rn.style.color=r.h;
   document.getElementById("rt").textContent=r.tag;
   document.getElementById("rd").textContent=r.desc;
+
+  // Secretul ochelarilor
+  var rs=document.getElementById("rs");
+  rs.style.borderColor=r.h;
+  document.getElementById("rst").textContent=r.sec;
+
+  // Sectiuni extinse
+  document.getElementById("extra").innerHTML=
+    '<div class="xblock" style="border-color:'+r.h+'">'+
+      '<div class="xlabel" style="color:'+r.h+'">&#9889; Superputerea ta</div>'+
+      '<div class="xtext">'+r.super+'</div>'+
+    '</div>'+
+    '<div class="xblock" style="border-color:#444">'+
+      '<div class="xlabel" style="color:#888">&#9632; Umbra ta</div>'+
+      '<div class="xtext">'+r.umbra+'</div>'+
+    '</div>'+
+    '<div class="xblock" style="border-color:'+r.h+'55">'+
+      '<div class="xlabel" style="color:'+r.h+'">&#128172; Ce spun altii fara sa stie</div>'+
+      '<div class="xtext" style="font-style:italic">'+r.altii+'</div>'+
+    '</div>'+
+    '<div class="xblock" style="border-color:'+r.h+'44">'+
+      '<div class="xlabel" style="color:'+r.h+'">&#128218; Personajul tau din carte</div>'+
+      '<div class="xtext">'+r.personaj+'</div>'+
+    '</div>'+
+    '<div class="xblock" style="border-color:#C9950A;background:#1A1200">'+
+      '<div class="xlabel" style="color:#C9950A">&#127919; Provocarea ta de azi</div>'+
+      '<div class="xtext" style="color:#E8C96A">'+r.provocare+'</div>'+
+    '</div>';
+
   arata("p2");
 }
 
@@ -216,3 +345,4 @@ function rst(){
 </script>
 </body>
 </html>
+
